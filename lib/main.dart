@@ -80,12 +80,22 @@ class _MyHomePageState extends State<MyHomePage> {
                 errorText: _passwordError,
               ),
             ),
+            //sized box
+            SizedBox(height: 8),
             //add login button
             Row(
               children: [
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).primaryColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero,
+                      ),
+                      foregroundColor:
+                          Colors.white, // Change text color to white
+                    ),
                     child: Text('Login'),
                   ),
                 ),
