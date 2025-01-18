@@ -44,6 +44,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  String? _emailError;
+  String? _passwordError;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,17 +63,21 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             //add email input field
             TextField(
+              controller: _emailController,
               decoration: InputDecoration(
                 hintText: 'Email',
                 border: OutlineInputBorder(),
+                errorText: _emailError,
               ),
             ),
             SizedBox(height: 8),
             //add password input field
             TextField(
+              controller: _passwordController,
               decoration: InputDecoration(
                 hintText: 'Password',
                 border: OutlineInputBorder(),
+                errorText: _passwordError,
               ),
             ),
             //add login button
@@ -76,9 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
               children: [
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {
-                      //add login logic
-                    },
+                    onPressed: () {},
                     child: Text('Login'),
                   ),
                 ),
