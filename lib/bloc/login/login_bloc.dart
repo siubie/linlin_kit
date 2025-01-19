@@ -6,8 +6,10 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginInitial()) {
-    on<LoginEvent>((event, emit) {
+    on<LoginButtonPressed>((event, emit) {
       // TODO: implement event handler
+      print(event.email);
+      print(event.password);
     });
   }
 }
