@@ -58,58 +58,78 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            //add email input field
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(
-                hintText: 'Email',
-                border: OutlineInputBorder(),
-                errorText: _emailError,
-              ),
-            ),
-            SizedBox(height: 8),
-            //add password input field
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(
-                hintText: 'Password',
-                border: OutlineInputBorder(),
-                errorText: _passwordError,
-              ),
-            ),
-            //sized box
-            SizedBox(height: 8),
-            //add login button
-            Row(
+        child: BlocBuilder<LoginBloc, LoginState>(
+          builder: (context, state) {
+            if (state is LoginInProgress) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (state is LoginFailure) {
+              _emailError = state.error;
+              _passwordError = state.error;
+            }
+
+            if (state is LoginSuccess) {
+              return Center(
+                child: Text('Login Success'),
+              );
+            }
+
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      //call login event
-                      context.read<LoginBloc>().add(
-                            LoginButtonPressed(
-                              email: _emailController.text,
-                              password: _passwordController.text,
-                            ),
-                          );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).primaryColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.zero,
-                      ),
-                      foregroundColor:
-                          Colors.white, // Change text color to white
-                    ),
-                    child: Text('Login'),
+                //add email input field
+                TextField(
+                  controller: _emailController,
+                  decoration: InputDecoration(
+                    hintText: 'Email',
+                    border: OutlineInputBorder(),
+                    errorText: _emailError,
                   ),
                 ),
+                SizedBox(height: 8),
+                //add password input field
+                TextField(
+                  controller: _passwordController,
+                  decoration: InputDecoration(
+                    hintText: 'Password',
+                    border: OutlineInputBorder(),
+                    errorText: _passwordError,
+                  ),
+                ),
+                //sized box
+                SizedBox(height: 8),
+                //add login button
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          //call login event
+                          context.read<LoginBloc>().add(
+                                LoginButtonPressed(
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                ),
+                              );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Theme.of(context).primaryColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.zero,
+                          ),
+                          foregroundColor:
+                              Colors.white, // Change text color to white
+                        ),
+                        child: Text('Login'),
+                      ),
+                    ),
+                  ],
+                ),
               ],
-            ),
-          ],
+            );
+          },
         ),
       ),
     );
