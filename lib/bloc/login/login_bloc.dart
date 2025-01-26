@@ -20,7 +20,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         if (e is DioException) {
           final loginValidationError =
               LoginValidationError.fromJson(e.response?.data);
-          emit(LoginFailure(error: loginValidationError.message ?? 'Unknown error'));
+          emit(LoginFailure(
+              error: loginValidationError.message ?? 'Unknown error'));
         } else {
           emit(LoginFailure(error: 'Something went wrong'));
         }
