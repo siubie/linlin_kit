@@ -27,4 +27,26 @@ class ApiService {
       throw Exception('Unknown error occurred');
     }
   }
+
+  //make login request
+  Future<Response> login({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final response = await _dioClient.post(
+        ApiConfig.login,
+        data: {
+          'email': email,
+          'password': password,
+        },
+      );
+      return response;
+    } on DioException {
+      rethrow;
+    } catch (e) {
+      // Handle other exceptions
+      throw Exception('Unknown error occurred');
+    }
+  }
 }

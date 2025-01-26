@@ -18,6 +18,15 @@ class BadRequestException extends ApiException {
   }
 }
 
+class ValidationErrorExeption extends ApiException {
+  ValidationErrorExeption(super.r);
+
+  @override
+  String toString() {
+    return 'Validation error';
+  }
+}
+
 class UnauthorizedException extends ApiException {
   UnauthorizedException(super.r);
 

@@ -1,9 +1,10 @@
 class ApiConfig {
   static const String baseUrl =
-      'https://halaljapan.dosenngoding.com/api'; // Replace with your API URL
+      'https://kaido.dosenngoding.com/api'; // Replace with your API URL
 
   // API Endpoints
   static const String products = '/products';
+  static const String login = '/login';
 
   // API Timeouts
   static const int connectTimeout = 30000; // 30 seconds
